@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "t1_utils.h"
 
 /*** Definir aqui o tamanho da cache, em bytes. ****/
@@ -19,12 +20,11 @@ const int length_list = cache_size/sizeof(Node);
 const int length_mat = length/2;
 
 int* arr;
-int* matA; 
-int** matB;
 Node* inicio_lista;
 
 int main(){
-    int input = 0;
+    int input = 0;              // Input usuário (menu)
+    int n = sqrt(length_mat);   // Dimensão das matrizes quadradas
     srand(time(NULL));
 
     do{
@@ -47,7 +47,7 @@ int main(){
                 /* ----- Algoritmo de ordenação com array (vetor) ----- */
                 printf("\nAlocando memória para o array... ");
                 arr = (int*) malloc(length * sizeof(int));
-                printf("Finalizado. \n")
+                printf("Finalizado. \n");
 
                 // Preenchendo o array com valores aleatórios, de 0 a MAX_RANGE
                 for(int i = 0; i < length; i++){
@@ -104,47 +104,64 @@ int main(){
             case 3: 
                 /* ----- Multiplicação de matrizes ----- */
                 // Alocação de memória para as matrizes
-                printf("\nAlocando memória para uma matriz linha e uma matriz coluna:\n%d bytes/matriz\n%d elementos/matriz\n", cache_size/2, length_mat);
-                matA = (int*) malloc(length_mat * sizeof(int));
+                printf("\nAlocando memória para uma matriz nxn:\n%d bytes/matriz\n%d elementos/matriz\n", cache_size/2, length_mat);
+                int **matA = allocateMatrix(n);
+                int **matB = allocateMatrix(n);
+                int **matC = allocateMatrix(n);
 
-                matB = (int**) malloc(length_mat * sizeof(int*));
-                for(int i =0; i < length_mat; i++){
-                    matB[i] = (int*) malloc(sizeof(int));
+                // Preenchendo as matrizes com valores aleatórios (0-9 para evitar overflow na multiplicação)
+                printf("Finalizado.\n\nPreenchendo as matrizes com valores aleatórios... ");
+                for(int i = 0; i < n; i++){
+                    for(int j = 0; j < n; j++){
+                        matA[i][j] = random_int(0, 9);
+                        matB[i][j] = random_int(0, 9);
+                    }
+                }
+                printf("Finalizado.\n\nRealizar multiplicação por matriz transposta?\n0 - Não\n1 - Sim\n");
+                if(scanf("%d", &input) != 1){
+                    printf("Entrada inválida. Tente novamente.\n");
+                    limpaBuffer();
+                    continue;
                 }
 
-                printf("Finalizado.\n\nPreenchendo as matrizes com valores aleatórios... ");
-                // Preenchendo as matrizes com valores aleatórios (0-9 para evitar overflow na multiplicação)
-                for(int i = 0; i < length_mat; i++){
-                    matA[i]     = random_int(0, 9);
-                    matB[i][0]  = random_int(0, 9);
+                limpaBuffer();
+                printf("Realizando multiplicação... ");
+
+                switch(input){
+                    case 0:
+                        // Multiplicação padrão
+                        multiplyMatrices(n, matA, matB, matC, false);
+                        break;
+                    case 1:
+                        // Multiplicação por matriz transposta
+                        multiplyMatrices(n, matA, matB, matC, true);
+                        break;
+                    default:
+                        printf("Entrada inválida.\n\n");
+                        break;
                 }
                 printf("Finalizado.\n\n");
 
-                /*// Print das matrizes linha e coluna 
-                printf("A =\n[ ");
-                for(int i = 0; i < length_mat; i++){
-                    printf("%02d ", matA[i]);
-                }
-                printf("]\n\n");
+                // Print das matrizes (apenas debug)
+                /*
+                printf("A =\n");
+                printMatrix(n, matA);
+                printf("\n\n");
 
                 printf("B =\n");
-                for(int i = 0; i < length_mat; i++){
-                    printf("[ %02d ]\n", matB[i][0]);
-                }*/
+                printMatrix(n, matB);
+                printf("\n\n");
 
-                int C = 0;
-                for(int i = 0; i < length_mat; i++){
-                    C += matA[i] * matB[i][0];
-                }
-                printf("A * B = [ %d ]\n\n", C);
+                printf("Res =\n");
+                printMatrix(n, matC);
+                printf("\n\n");
+                */
 
                 // Liberar memória alocada
                 printf("Liberando memória alocada... ");
-                for (int i = 0; i < length_mat; i++) {
-                    free(matB[i]);
-                }
-                free(matB);
-                free(matA);
+                freeMatrix(matA, n);
+                freeMatrix(matB, n);
+                freeMatrix(matC, n);
                 printf("Finalizado.\n\n");
                 break;
 

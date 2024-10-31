@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 // Struct de nó da lista encadeada.
 typedef struct Node{
@@ -105,6 +106,54 @@ void printFirstLastNpos(int N, int length, int arr[]){
         printf("%d ", arr[length - i]);
     }
     printf("\n\n");
+}
+
+// Aloca memória para uma matriz N x N.
+int** allocateMatrix(int n){
+    int** matrix = (int**) malloc(n * sizeof(int*));
+    for(int i = 0; i < n; i++) matrix[i] = (int*) malloc(n * sizeof(int));
+    return matrix;
+}
+
+// Libera a memória ocupada pela matriz N x N.
+void freeMatrix(int** matrix, int n){
+    for(int i = 0; i < n; i ++) free(matrix[i]);
+    free(matrix);
+}
+
+// Multiplicação de matrizes quadradas N x N. A * B = C. 
+// Se matriz B transposta, transposed = true.
+void multiplyMatrices(int n, int** A, int** B, int** C, bool transposed) {
+    if (transposed) {
+        // Multiplicação linha por linha (B está transposta)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] = 0;
+                for (int k = 0; k < n; k++) {
+                    C[i][j] += A[i][k] * B[j][k];
+                }
+            }
+        }
+    } else {
+        // Multiplicação padrão (linha por coluna)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] = 0;
+                for (int k = 0; k < n; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+    }
+}
+
+void printMatrix(int n, int **A){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            printf("%d ", A[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 void limpaBuffer(){
