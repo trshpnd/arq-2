@@ -1,0 +1,49 @@
+perf stat -e instructions,cycles,"LLC-load-misses","LLC-store-misses","LLC-loads","L1-dcache-loads","L1-dcache-load-misses","L1-icache-loads","L1-icache-load-misses","L2-loads","L2-load-misses","longest_lat_cache.miss" -a ./app
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+1
+
+Alocando memória para o array... Finalizado. 
+Array preenchido.
+
+(0 - 10):
+3553335 1492373 9214073 6826259 496846 4909396 3090242 6406572 4143918 5119990 ...
+
+(2563990 - 2564000):
+... 1678816 7419841 3146115 9145752 9396730 3858214 9851595 9916092 3633855 9451681 
+
+Realizando algoritmo de quicksort... Array ordenado.
+
+(0 - 10):
+0 3 7 9 18 22 25 26 29 31 ...
+
+(2563990 - 2564000):
+... 9999968 9999971 9999972 9999972 9999978 9999983 9999986 9999992 9999993 9999997 
+
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+4
+Saindo.
+ 
+ Performance counter stats for 'system wide':
+
+     5.687.543.908      instructions                     #    0,92  insn per cycle              (45,44%)
+     6.162.976.091      cycles                                                                  (54,54%)
+         5.864.002      LLC-load-misses                  #   30,71% of all LL-cache accesses    (54,54%)
+         4.937.061      LLC-store-misses                                                        (54,54%)
+        19.096.602      LLC-loads                                                               (18,18%)
+     1.860.964.434      L1-dcache-loads                                                         (27,28%)
+        58.489.097      L1-dcache-load-misses            #    3,14% of all L1-dcache accesses   (36,37%)
+   <not supported>      L1-icache-loads                                                       
+        90.934.035      L1-icache-load-misses                                                   (36,37%)
+        17.572.960      L2-loads                                                                (36,38%)
+         5.796.855      L2-load-misses                   #   30,36% of all LL-cache accesses    (36,36%)
+        52.808.636      longest_lat_cache.miss                                                  (36,36%)
+
+       3,563791344 seconds time elapsed
+
+

@@ -1,0 +1,42 @@
+perf stat -e instructions,cycles,"LLC-load-misses","LLC-store-misses","LLC-loads","L1-dcache-loads","L1-dcache-load-misses","L1-icache-loads","L1-icache-load-misses","L2-loads","L2-load-misses","longest_lat_cache.miss" -a ./app
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+3
+
+Alocando memória para uma matriz nxn:
+5128000 bytes/matriz
+1282000 elementos/matriz
+Finalizado.
+
+Preenchendo as matrizes com valores aleatórios... Finalizado.
+
+Realizar multiplicação por matriz transposta?
+0 - Não
+1 - Sim
+4
+Realizando multiplicação... Entrada inválida.
+
+Finalizado.
+
+Liberando memória alocada... Finalizado.
+
+
+ Performance counter stats for 'system wide':
+
+     4.406.744.944      instructions                     #    0,70  insn per cycle              (45,43%)
+     6.277.987.351      cycles                                                                  (54,52%)
+        10.406.924      LLC-load-misses                  #   38,04% of all LL-cache accesses    (54,53%)
+         9.173.077      LLC-store-misses                                                        (54,55%)
+        27.356.070      LLC-loads                                                               (18,19%)
+     1.114.952.622      L1-dcache-loads                                                         (27,29%)
+        84.289.985      L1-dcache-load-misses            #    7,56% of all L1-dcache accesses   (36,38%)
+   <not supported>      L1-icache-loads                                                       
+       132.816.806      L1-icache-load-misses                                                   (36,37%)
+        29.119.163      L2-loads                                                                (36,35%)
+        10.974.602      L2-load-misses                   #   40,12% of all LL-cache accesses    (36,34%)
+        82.816.857      longest_lat_cache.miss                                                  (36,34%)
+
+       5,846358856 seconds time elapsed
+

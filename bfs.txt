@@ -1,0 +1,37 @@
+perf stat -e instructions,cycles,"LLC-load-misses","LLC-store-misses","LLC-loads","L1-dcache-loads","L1-dcache-load-misses","L1-icache-loads","L1-icache-load-misses","L2-loads","L2-load-misses","longest_lat_cache.miss" -a ./app
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+2
+
+Lista duplamente encadeada criada. Valor contido no último nó: 781820 
+Realizando busca em profundidade pelo valor do último nó... Finalizado.
+Último elemento da lista: 781820
+Excluindo lista... Lista excluída com sucesso.
+
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+4
+Saindo.
+ 
+ Performance counter stats for 'system wide':
+
+     5.011.387.268      instructions                     #    0,93  insn per cycle              (45,46%)
+     5.396.336.848      cycles                                                                  (54,55%)
+         7.975.415      LLC-load-misses                  #   32,65% of all LL-cache accesses    (54,57%)
+         7.247.414      LLC-store-misses                                                        (54,56%)
+        24.426.892      LLC-loads                                                               (18,17%)
+     1.085.506.130      L1-dcache-loads                                                         (27,26%)
+        79.317.065      L1-dcache-load-misses            #    7,31% of all L1-dcache accesses   (36,35%)
+   <not supported>      L1-icache-loads                                                       
+       122.921.483      L1-icache-load-misses                                                   (36,35%)
+        23.872.809      L2-loads                                                                (36,36%)
+         7.615.183      L2-load-misses                   #   31,18% of all LL-cache accesses    (36,37%)
+        65.438.119      longest_lat_cache.miss                                                  (36,37%)
+
+       3,894564738 seconds time elapsed
+
+
