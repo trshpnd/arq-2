@@ -1,0 +1,45 @@
+perf stat -e instructions,cycles,"LLC-load-misses","LLC-store-misses","LLC-loads","L1-dcache-loads","L1-dcache-load-misses","L1-icache-loads","L1-icache-load-misses","L2-loads","L2-load-misses","longest_lat_cache.miss" -a ./main
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+3
+
+Alocando memória para uma matriz nxn:
+5128000 bytes/matriz
+1282000 elementos/matriz
+Finalizado.
+
+Preenchendo as matrizes com valores aleatórios... Finalizado.
+
+Realizar multiplicação por matriz transposta?
+0 - Não
+1 - Sim
+0
+Realizando multiplicação... Finalizado.
+
+Liberando memória alocada... Finalizado.
+
+1. Ordenação de array por quicksort.
+2. Busca em profundidade em linked list.
+3. Multiplicação de matrizes.
+4. Sair.
+4
+Saindo.
+ 
+ Performance counter stats for 'system wide':
+
+    73.903.194.069      instructions                     #    2,36  insn per cycle              (45,43%)
+    31.368.245.800      cycles                                                                  (45,46%)
+         7.677.905      LLC-load-misses                  #    5,06% of all LL-cache accesses    (45,49%)
+         3.483.530      LLC-store-misses                                                        (45,50%)
+       151.770.050      LLC-loads                                                               (18,18%)
+    32.252.151.612      L1-dcache-loads                                                         (27,27%)
+     1.750.097.997      L1-dcache-load-misses            #    5,43% of all L1-dcache accesses   (36,35%)
+   <not supported>      L1-icache-loads                                                       
+        75.512.430      L1-icache-load-misses                                                   (36,33%)
+       151.690.098      L2-loads                                                                (36,33%)
+         7.739.937      L2-load-misses                   #    5,10% of all LL-cache accesses    (36,33%)
+        50.969.574      longest_lat_cache.miss                                                  (36,33%)
+
+      11,924571486 seconds time elapsed
